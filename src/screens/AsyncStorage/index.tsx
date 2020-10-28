@@ -24,9 +24,14 @@ const AsyncStorageS = (props: Props) => {
 
   const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
 
-  const handleLogin = (data: any) => {
+  const handleLogin = async (data: any) => {
     dispatch({type: actionTypes.LOGIN, username: data.email,password: data.password })
+    await AsyncStorage.setItem('userToken', data.email);
    navigate(Routes.Welcome)
+  };
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('userToken');
   };
 
   useEffect(() => {
@@ -36,6 +41,7 @@ const AsyncStorageS = (props: Props) => {
       userToken = null;
       try {
         userToken = await AsyncStorage.getItem('userToken');
+        if (userToken ) {navigate(Routes.Welcome)}
       } catch(e) {
         console.log(e);
       }
