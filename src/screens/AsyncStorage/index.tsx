@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, ActivityIndicator } from 'react-native'
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { Formik } from 'formik';
 import * as Yup from 'yup'
 import { Buttons, Inputs } from '../../components'
@@ -31,7 +31,7 @@ const AsyncStorageS = (props: Props) => {
 
   useEffect(() => {
     setTimeout(async() => {
-      // setIsLoading(false);
+    
       let userToken;
       userToken = null;
       try {
@@ -39,35 +39,26 @@ const AsyncStorageS = (props: Props) => {
       } catch(e) {
         console.log(e);
       }
-      // console.log('user token: ', userToken);
+     
       dispatch({ type: actionTypes.RETRIEVE_TOKEN, token: userToken });
     }, 1000);
   }, []);
 
   if( loginState.isLoading ) {
     return(
-      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+      <View style={styles.loader}>
         <ActivityIndicator size="large"/>
       </View>
     );
   }
 
   return (
-    <View style={{flex: 1, backgroundColor:'white'}}>
-			<View style={{flex:1, borderBottomLeftRadius:80, backgroundColor:"#FFC107", alignContent:"center", justifyContent:"flex-end"}} />
-	<View style={{
-        flex:1,
-        backgroundColor:"#FFC107" 
-  }}>
-	<View style={{
-    flex:1,
-    backgroundColor:'white', 
-    borderTopRightRadius:80,
-  }
-    
-    }>
-      <View style={{marginHorizontal:20, marginTop:30}}>
-      <Text style={{fontSize:30, textAlign:'center'}}>Login</Text>
+    <View style={styles.wrapper}>
+			<View style={styles.header} />
+	      <View style={{flex:1,backgroundColor:"#FFC107" }}>
+	     <View style={styles.headerUnderlay}>
+      <View style={styles.formWrapper}>
+      <Text style={styles.title}>Login</Text>
 
       <Formik
             initialValues={{ email: '', password: '' }}
@@ -82,16 +73,13 @@ const AsyncStorageS = (props: Props) => {
               touched
             }) => (
               <>
-                                    <Inputs.Default 
-                                      placeholder="Email"
-                                      onTextChange={handleChange('email')}
-                                      value={values.email}
-                                      error={errors.email}
-                                      touch={touched.email}
+                    <Inputs.Default 
+                      placeholder="Email"
+                      onTextChange={handleChange('email')}
+                      value={values.email}
+                      error={errors.email}
+                      touch={touched.email}
                                     
-                                      
-                                      
-                                     
                     />
                        <Inputs.Default 
                         placeholder="Password"
@@ -101,7 +89,7 @@ const AsyncStorageS = (props: Props) => {
                         error={errors.password}
                         touch={touched.password}
                        
-      />
+                    />
 
 
                 <Buttons.Primary onClick={handleSubmit} title="Login" />
@@ -114,38 +102,62 @@ const AsyncStorageS = (props: Props) => {
   </View>
   </View>
 
-  <View style={{
-           flex:1/3,
-           backgroundColor:"#6F0F71" 
-  }}>
-    <View style={{
-             flex:1,
-             backgroundColor:"white" ,
-             borderBottomLeftRadius:80,
-             borderBottomRightRadius:80
-    }}>
-
-    </View>
+  <View style={styles.footerUnderlay}>
+    <View style={styles.footerTop}/>
   </View>
-					<View
-          style={{
-						backgroundColor:"#6F0F71",
-						height:10,
-						justifyContent:"space-evenly",
-						padding:80,
-            alignItems:"center",
-            
-            
-           
-          }}
-					>
-
-						
-
-			
-			</View>
+					<View style={styles.footerBottom}/>
 		</View>
   )
 }
+const styles = StyleSheet.create({
+  wrapper:{
+    flex: 1, 
+    backgroundColor:'white'
+  },
+  header: {
+    flex:1, 
+    borderBottomLeftRadius:80, 
+    backgroundColor:"#FFC107", 
+    alignContent:"center", 
+    justifyContent:"flex-end"
+  },
+  headerUnderlay:{
+    flex:1,
+    backgroundColor:'white', 
+    borderTopRightRadius:80,
+  }
+  ,
+  title:{
+    fontSize:30, 
+    textAlign:'center'
+  },
+  loader: {
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  formWrapper:{
+    marginHorizontal:20, 
+    marginTop:30
+  },
+  footerUnderlay:{
+    flex:1/3,
+    backgroundColor:"#6F0F71" 
+  },
 
+  footerTop:{
+    flex:1,
+    backgroundColor:"white" ,
+    borderBottomLeftRadius:80,
+    borderBottomRightRadius:80
+  },
+
+footerBottom: {
+  backgroundColor:"#6F0F71",
+  height:10,
+  justifyContent:"space-evenly",
+  padding:80,
+  alignItems:"center",
+}
+})
 export default AsyncStorageS

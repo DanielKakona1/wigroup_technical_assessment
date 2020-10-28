@@ -45,20 +45,8 @@ if (search ===''){
       onTextChange={text => handleSearch(text)}
       />
       
-<Lists.WikiSearch results={result} />
-     {/*   {result.map ((item : Props) => (
-        <TouchableOpacity style={{
-          borderColor:'lightgrey',
-          borderBottomWidth:1,
-          padding:20
-        }}>
-           <Text>{item.title}</Text>
-        </TouchableOpacity>
-           
-      ))}  */}
-    
-
-  
+      <Lists.WikiSearch results={result} />
+     
     </SafeAreaView>
   )
 }
