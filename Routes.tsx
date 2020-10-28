@@ -21,6 +21,7 @@ const AppContainer = () => {
         <Stack.Screen name={Routes.WikipediaDetails} component={Screens.WikipediaDetails} />
         <Stack.Screen name={Routes.AsyncStorage} component={Screens.AsyncStorage} />
         <Stack.Screen name={Routes.Welcome} component={Screens.Welcome} />
+        <Stack.Screen name={Routes.Screen3} component={Screens.Screen3} />
       </Stack.Navigator>
     </NavigationContainer>
   );

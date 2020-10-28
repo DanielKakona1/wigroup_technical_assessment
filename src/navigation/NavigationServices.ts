@@ -14,7 +14,8 @@ export enum Routes {
   Wikipedia = 'Wikipedia',
   WikipediaDetails = 'WikipediaDetails',
   AsyncStorage = 'AsyncStorage',
-  Welcome = 'Welcome'
+  Welcome = 'Welcome',
+  Screen3 = 'Screen3'
 }
 
 export type StackParamList = {
@@ -24,4 +25,5 @@ export type StackParamList = {
   [Routes.WikipediaDetails]: undefined;
   [Routes.AsyncStorage]: undefined;
   [Routes.Welcome]: undefined;
+  [Routes.Screen3]: undefined;
 };

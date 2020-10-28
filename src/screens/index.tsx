@@ -4,6 +4,7 @@ import AsyncStorage from './AsyncStorage';
 import Welcome from './Welcome';
 import Wikipedia from './Wikipedia';
 import WikipediaDetails from './WikipediaDetails';
+import Screen3 from './Screen3';
 
 export {
   Home,
@@ -11,5 +12,6 @@ export {
   AsyncStorage,
   Welcome,
   Wikipedia,
-  WikipediaDetails
+  WikipediaDetails,
+  Screen3
 };

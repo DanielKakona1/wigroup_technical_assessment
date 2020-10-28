@@ -17,7 +17,10 @@ const LoginSchema = Yup.object().shape({
     .min(8, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required')
+  username: Yup.string()
+    .min(5, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
 });
 
 const AsyncStorageS = (props: Props) => {
@@ -25,14 +28,11 @@ const AsyncStorageS = (props: Props) => {
   const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
 
   const handleLogin = async (data: any) => {
-    dispatch({type: actionTypes.LOGIN, username: data.email,password: data.password })
-    await AsyncStorage.setItem('userToken', data.email);
+    dispatch({type: actionTypes.LOGIN, username: data.username,password: data.password })
+    await AsyncStorage.setItem('userToken', data.username);
    navigate(Routes.Welcome)
   };
 
-  const handleLogout = async () => {
-    await AsyncStorage.removeItem('userToken');
-  };
 
   useEffect(() => {
     setTimeout(async() => {
@@ -67,7 +67,7 @@ const AsyncStorageS = (props: Props) => {
       <Text style={styles.title}>Login</Text>
 
       <Formik
-            initialValues={{ email: '', password: '' }}
+            initialValues={{ username: '', password: '' }}
             validationSchema={LoginSchema}
             onSubmit={values => handleLogin(values)}
           >
@@ -80,11 +80,11 @@ const AsyncStorageS = (props: Props) => {
             }) => (
               <>
                     <Inputs.Default 
-                      placeholder="Email"
-                      onTextChange={handleChange('email')}
-                      value={values.email}
-                      error={errors.email}
-                      touch={touched.email}
+                      placeholder="Username"
+                      onTextChange={handleChange('username')}
+                      value={values.username}
+                      error={errors.username}
+                      touch={touched.username}
                                     
                     />
                        <Inputs.Default 
