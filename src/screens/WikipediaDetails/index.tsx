@@ -1,6 +1,6 @@
 import { WebView } from 'react-native-webview';
 import React, { useEffect } from 'react';
-import { SafeAreaView,Text } from 'react-native';
+import { ActivityIndicator, SafeAreaView,Text } from 'react-native';
 import { wiki } from '../../config/axios';
 
 
@@ -14,12 +14,12 @@ const WikipediaDetail =  ({ route }) => {
         params: {
           action: 'query',
           prop:'info',
-          pageids: 44364025,
+          pageids: route.params.pageid,
           inprop:'url',
           format: 'json'
         } 
       });
-  setUrl(results.data.query.pages[44364025].fullurl)
+  setUrl(results.data.query.pages[route.params.pageid].fullurl)
       
     } catch (err) {
       console.log(err);
@@ -38,8 +38,11 @@ const WikipediaDetail =  ({ route }) => {
    
    <WebView 
   originWhitelist={['*']}
-  source={{ uri: url }} 
-  style={{ marginTop: 20 }}
+    source={{ uri: url }} 
+    style={{ marginTop: 20 }}
+    onError={() =>   RetrievingPageURLByPageID()}
+    startInLoadingState={true}
+    renderLoading={() => ( <ActivityIndicator color='red' /> )}
   />  
 </SafeAreaView>
 )
