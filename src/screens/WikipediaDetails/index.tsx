@@ -4,7 +4,11 @@ import { ActivityIndicator, SafeAreaView,Text } from 'react-native';
 import { wiki } from '../../config/axios';
 
 
-const WikipediaDetail =  ({ route }) => {
+const WikipediaDetail =  ({ navigation,route }: any) => {
+
+  navigation.setOptions({
+    headerShown: true,
+})
 
   const [url, setUrl] = React.useState('')
 

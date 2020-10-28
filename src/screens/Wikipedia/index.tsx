@@ -8,7 +8,10 @@ interface Props {
 }
 
 
-const Wikipedia = () => {
+const Wikipedia = ({navigation}: any) => {
+  navigation.setOptions({
+    headerShown: true,
+})
   const [result, setResult] = React.useState([]);
 
 const handleSearch = async (search:string) => {

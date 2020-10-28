@@ -4,8 +4,10 @@ import { WebView } from 'react-native-webview';
 import {Inputs} from '../../components'
 import helpers from '../../helpers'
 
-export default function App() {
-
+export default function AutoSearch({navigation}:any) {
+  navigation.setOptions({
+    headerShown: true,
+})
   const [url, setUrl] = React.useState('')
   const [error, setError]= React.useState(false)
   const [touched, setTouched]= React.useState(false)
