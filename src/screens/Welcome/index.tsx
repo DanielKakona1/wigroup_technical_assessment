@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { Buttons } from '../../components'
 
 interface Props {
   
@@ -7,10 +8,20 @@ interface Props {
 
 const Welcome = (props: Props) => {
   return (
-    <View>
-      <Text>Welcome</Text>
+    <View style={styles.screenWrapper}>
+    <Buttons.Primary onClick={()=> console.log('hhh')} title="Screen 3"/>
     </View>
   )
 }
 
+const styles = StyleSheet.create({
+screenWrapper:{
+  flex:1,
+  justifyContent:'center'
+}
+})
+
 export default Welcome
+
+
+
